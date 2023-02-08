@@ -1,0 +1,170 @@
+
+
+local loadedKey = loadstring(game:HttpGet('https://raw.githubusercontent.com/GHLoverS/Key/main/zırtapoz'))()
+
+getgenv().inputKey = ""
+
+function LoadMain()
+   setclipboard("https://discord.gg/Rp7Fstp8fR")
+
+   local vu = game:GetService("VirtualUser")
+   game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   end)
+   
+   
+   
+   local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+   
+   local Window = Rayfield:CreateWindow({
+       Name = "William Hub",
+       LoadingTitle = "William Scripts Industry",
+       LoadingSubtitle = "by William",
+       ConfigurationSaving = {
+          Enabled = true,
+          FolderName = nil, -- Create a custom folder for your hub/game
+          FileName = "Big Hub"
+       },
+       Discord = {
+          Enabled = false,
+          Invite = "Rp7Fstp8fR", -- The Discord invite code, do not include discord.gg/
+          RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+       },
+       KeySystem = false, -- Set this to true to use our key system
+       KeySettings = {
+          Title = "William Hub",
+          Subtitle = "Key System",
+          Note = "Key on the Discord (Discord link copied to clipboard)",
+          FileName = "SiriusKey",
+          SaveKey = true,
+          GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+          Key = "Hello"
+       }
+    })   
+   
+    local Tab = Window:CreateTab("Hub", 4483362458) -- Title, Image
+   
+    local Section = Tab:CreateSection("Scripts")
+   
+    local Button = Tab:CreateButton({
+       Name = "Strong Muscle Sim (PC)",
+       Callback = function()
+       if game.PlaceId == 10945472407 then
+           loadstring(game:HttpGet("https://raw.githubusercontent.com/AHKSS/strongmusclesimscript/main/hub", true))()
+           Rayfield:Destroy()
+       else
+         Rayfield:Notify({
+            Title = "WARNING!",
+            Content = "Please Join Strong Muscle Simulator For the Script. Script Hub Will destroy in 5 Seconds.",
+            Duration = 5,
+         })
+         wait(5.5)
+         Rayfield:Destroy()
+       end
+       end,
+    })
+   
+    local Button = Tab:CreateButton({
+      Name = "Strong Muscle Sim (MOBILE)",
+      Callback = function(value)
+         if game.PlaceId == 10945472407 then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/AHKSS/strongmusclesimscriptmobile/main/strongmusclesimscriptmobile", true))()
+            Rayfield:Destroy()
+         else
+            Rayfield:Notify({
+               Title = "WARNING!",
+               Content = "Please Join Strong Muscle Simulator For the Script. Script Hub Will destroy in 5 Seconds.",
+               Duration = 5,
+            })
+            wait(5.5)
+            Rayfield:Destroy()
+         end
+        end,
+   })
+   
+   local Button = Tab:CreateButton({
+      Name = "Bubble Gum Clicker",
+      Callback = function()
+         if game.PlaceId == 11746859781 then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/AHKSS/scripts/main/bubblegumclicker", true))()
+            Rayfield:Destroy()
+         else
+            Rayfield:Notify({
+               Title = "WARNING!",
+               Content = "Please Join Bubble Gum Clicker For the Script. Script Hub Will destroy in 5 Seconds.",
+               Duration = 5,
+            })
+            wait(5.5)
+            Rayfield:Destroy()
+         end
+      end,
+   })
+end
+
+function readKey()
+    setclipboard("https://discord.gg/Rp7Fstp8fR")
+    if readfile("/WS/key.txt") == loadedKey then
+             LoadMain()
+       else
+            local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+            local keyWindow = Rayfield:CreateWindow({
+                Name = "Key",
+                LoadingTitle = "Get your key at discord (Copied to clipboard)",
+                LoadingSubtitle = "by William",
+                ConfigurationSaving = {
+                   Enabled = true,
+                   FolderName = nil, -- Create a custom folder for your hub/game
+                   FileName = "Big Hub"
+                },
+                Discord = {
+                   Enabled = false,
+                   Invite = "Rp7Fstp8fR", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD.
+                   RememberJoins = false -- Set this to false to make them join the discord every time they load it up
+                },
+                KeySystem = false, -- Set this to true to use our key system
+                KeySettings = {
+                   Title = "Sirius Hub",
+                   Subtitle = "Key System",
+                   Note = "Join the discord (discord.gg/sirius)",
+                   FileName = "SiriusKey",
+                   SaveKey = true,
+                   GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+                   Key = "Hello"
+                }
+             })
+            local Tab = keyWindow:CreateTab("Key", 4483362458) -- Title, Image
+            local Input = Tab:CreateInput({
+                Name = "Key",
+                PlaceholderText = "Put Your Key Here",
+                RemoveTextAfterFocusLost = false,
+                Callback = function(Text)
+                    getgenv().inputKey = Text
+                end,
+             })
+            local Button = Tab:CreateButton({
+            Name = "Check Key",
+                Callback = function()
+                if getgenv().inputKey == loadedKey then
+                    writefile("/WS/key.txt", loadedKey)
+                    LoadMain()
+                    Rayfield:Destroy()
+                end
+                end,
+                 })
+    end
+end
+
+if isfolder("/WS") then
+    if isfile("/WS/key.txt", "") then
+        readKey()
+    else
+        writefile("/WS/key.txt", "")
+        readKey()
+    end
+else
+    makefolder("WS")
+    writefile("/WS/key.txt", "")
+    readKey()
+end
